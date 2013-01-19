@@ -1,4 +1,4 @@
-backup
-======
+Backup Scripts
+==============
 
-Backup scripts I use
+This repository contains backup scripts I use for various aspects of my life.
