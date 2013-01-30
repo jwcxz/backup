@@ -27,6 +27,13 @@ keep_max=0
 precmd () { false; }
 postcmd () { false; }
 
+rm_all_but () {
+    if [[ $1 != 0 ]]; then
+        echo "Removing all but the latest $2"
+        rm `ls -1 $archive_dir/$2 | head -n -$1`
+    fi
+}
+
 # source config file
 . $configfile
 
@@ -83,9 +90,6 @@ else
 fi
 
 # if there's a limit to the number of archives, only keep the last so-many
-if [[ $keep_max != 0 ]]; then
-    echo "Removing all but latest $keep_max archives"
-    rm `ls -1 $archive_dir/$backup_dir-* | head -n -$keep_max`
-fi
+rm_all_but $keep_max "$backup_dir-*"
 
 postcmd
